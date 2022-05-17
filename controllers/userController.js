@@ -9,7 +9,7 @@ exports.signup = BigPromise(async (req, res, next) => {
   let result;
   if (req.files) {
     let file = req.files.photo;
-    result = await cloudinary.v2.uploader.upload(file, {
+    result = await cloudinary.v2.uploader.upload(file.tempFilePath, {
       folder: 'users',
       width: 150,
       crop: 'scale',
