@@ -297,3 +297,44 @@ paths:
           description: Bad request
         500:
           description: internal server error
+
+  /userdashboard:
+    get:
+      tags:
+        - User
+      summary: Gets all details about logged in user. Send token in cookies as named token or send Bearer Auth
+      requestBody:
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      email:
+                        type: string
+                      role:
+                        type: string
+                      photo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          secure_url:
+                            type: string
+                      _id:
+                        type: string
+                      createdAt:
+                        type: string
+        400:
+          description: Bad request
+        500:
+          description: internal server error
