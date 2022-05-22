@@ -259,3 +259,13 @@ exports.adminAllUser = BigPromise(async (req, res, next) => {
     users,
   });
 });
+
+exports.managerAllUser = BigPromise(async (req, res, next) => {
+  // // select the user with role of user
+  const users = await User.find({ role: 'user' });
+
+  res.status(200).json({
+    success: true,
+    users,
+  });
+});
