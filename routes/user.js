@@ -12,6 +12,7 @@ const {
   updateUserDetails,
   adminAllUser,
   managerAllUser,
+  admingetOneUser,
 } = require('../controllers/userController');
 const { isLoggedIn, customRole } = require('../middlewares/user');
 
@@ -26,6 +27,9 @@ router.route('/userdashboard/update').post(isLoggedIn, updateUserDetails);
 
 // admin only routes
 router.route('/admin/users').get(isLoggedIn, customRole('admin'), adminAllUser);
+router
+  .route('/admin/user/:id')
+  .get(isLoggedIn, customRole('admin'), admingetOneUser);
 
 // manager only route
 router
