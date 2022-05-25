@@ -23,4 +23,16 @@ class WhereClause {
     this.base = this.base.find({ ...searchword });
     return this;
   }
+
+  pager(resultperPage) {
+    let currentPage = 1;
+    if (this.bigQ.page) {
+      currentPage = this.bigQ.page;
+    }
+
+    const skipVal = resultperPage * (currentPage - 1);
+
+    this.base = this.base.limit(resultperPage).skip(skipVal);
+    return this;
+  }
 }
