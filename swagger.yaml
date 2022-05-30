@@ -953,3 +953,305 @@ paths:
           description: Bad request
         500:
           description: internal server error
+
+  /admin/product/{id}:
+    put:
+      tags:
+        - Admin
+      summary: If admin, update the product. photos are optional to pass. Rest all body is set to be updated to what you pass here.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - name
+                - price
+                - description
+                - category
+                - stock
+                - brand
+              properties:
+                name:
+                  type: string
+                  required: true
+                price:
+                  type: number
+                  required: true
+                description:
+                  type: number
+                  required: true
+                category:
+                  type: string
+                  required: true
+                  enum: [shortsleeves, longsleeves, sweatshirt, hoodies]
+                stock:
+                  type: number
+                  required: true
+                brand:
+                  type: string
+                  required: true
+                photos:
+                  in: formData
+                  description: The uploaded photos
+                  type: file
+                  format: binary
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  product:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      name:
+                        type: string
+                      price:
+                        type: number
+                      description:
+                        type: string
+                      category:
+                        type: string
+                      brand:
+                        type: string
+                      ratings:
+                        type: number
+                      numberOfReviews:
+                        type: number
+                      user:
+                        type: string
+                      photos:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            secure_url:
+                              type: string
+                      reviews:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            comment:
+                              type: string
+                            user:
+                              type: string
+                            name:
+                              type: string
+                            rating:
+                              type: number
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+    delete:
+      tags:
+        - Admin
+      summary: If admin, pass the id of product and product will be removed
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /reviews:
+    get:
+      tags:
+        - Product
+      summary: A simple get request will give you all reviews for given products
+      parameters:
+        - name: id
+          in: query
+          description: id of the product
+          required: true
+          schema:
+            type: string
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  reviews:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user:
+                          type: string
+                        name:
+                          type: string
+                        rating:
+                          type: number
+                        comment:
+                          type: string
+                        _id:
+                          type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /review:
+    put:
+      tags:
+        - Product
+      summary: A logged in user can post a review on any product. If review is already posted, it will just update the existing review
+      parameters:
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - rating
+                - comment
+                - productId
+              properties:
+                rating:
+                  type: number
+                  required: true
+                comment:
+                  type: string
+                  required: true
+                productId:
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  reviews:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user:
+                          type: string
+                        name:
+                          type: string
+                        rating:
+                          type: number
+                        comment:
+                          type: string
+                        _id:
+                          type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+    delete:
+      tags:
+        - Product
+      summary: Delete the review of logged in user on given product id.
+      parameters:
+        - name: productId
+          in: query
+          required: true
+          schema:
+            type: string
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - rating
+                - comment
+                - productId
+              properties:
+                rating:
+                  type: number
+                  required: true
+                comment:
+                  type: string
+                  required: true
+                productId:
+                  type: string
+                  required: true
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  reviews:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        user:
+                          type: string
+                        name:
+                          type: string
+                        rating:
+                          type: number
+                        comment:
+                          type: string
+                        _id:
+                          type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
