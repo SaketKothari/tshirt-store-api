@@ -1255,3 +1255,632 @@ paths:
           description: Bad request
         500:
           description: internal server error
+
+  /order/create:
+    post:
+      tags:
+        - Order
+      summary: create a new order with given details
+      parameters:
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - shippingInfo
+                - paymentInfo
+                - taxAmount
+                - shippingAmount
+                - totalAmount
+                - orderItems
+              properties:
+                shippingInfo:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                    city:
+                      type: string
+                    phoneNo:
+                      type: string
+                    postalCode:
+                      type: string
+                    state:
+                      type: string
+                    country:
+                      type: string
+                paymentInfo:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                taxAmount:
+                  type: number
+                shippingAmount:
+                  type: number
+                totalAmount:
+                  type: number
+                orderItems:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      quantity:
+                        type: string
+                      image:
+                        type: string
+                      price:
+                        type: number
+                      product:
+                        type: string
+                        description: id of product
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  order:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      user:
+                        type: string
+                      orderStatus:
+                        type: string
+                      createdAt:
+                        type: string
+                      shippingInfo:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          city:
+                            type: string
+                          phoneNo:
+                            type: string
+                          postalCode:
+                            type: string
+                          state:
+                            type: string
+                          country:
+                            type: string
+                      paymentInfo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                      taxAmount:
+                        type: number
+                      shippingAmount:
+                        type: number
+                      totalAmount:
+                        type: number
+                      orderItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            quantity:
+                              type: string
+                            image:
+                              type: string
+                            price:
+                              type: number
+                            product:
+                              type: string
+                              description: id of product
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /order/{id}:
+    get:
+      tags:
+        - Order
+      summary: get details about a order with order id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the order
+          schema:
+            type: string
+
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  order:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          id:
+                            type: string
+                      orderStatus:
+                        type: string
+                      createdAt:
+                        type: string
+                      shippingInfo:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          city:
+                            type: string
+                          phoneNo:
+                            type: string
+                          postalCode:
+                            type: string
+                          state:
+                            type: string
+                          country:
+                            type: string
+                      paymentInfo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                      taxAmount:
+                        type: number
+                      shippingAmount:
+                        type: number
+                      totalAmount:
+                        type: number
+                      orderItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            quantity:
+                              type: string
+                            image:
+                              type: string
+                            price:
+                              type: number
+                            product:
+                              type: string
+                              description: id of product
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /myorder:
+    get:
+      tags:
+        - Order
+      summary: get order of logged in user
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  order:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      user:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          email:
+                            type: string
+                          id:
+                            type: string
+                      orderStatus:
+                        type: string
+                      createdAt:
+                        type: string
+                      shippingInfo:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          city:
+                            type: string
+                          phoneNo:
+                            type: string
+                          postalCode:
+                            type: string
+                          state:
+                            type: string
+                          country:
+                            type: string
+                      paymentInfo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                      taxAmount:
+                        type: number
+                      shippingAmount:
+                        type: number
+                      totalAmount:
+                        type: number
+                      orderItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            quantity:
+                              type: string
+                            image:
+                              type: string
+                            price:
+                              type: number
+                            product:
+                              type: string
+                              description: id of product
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /admin/orders:
+    get:
+      tags:
+        - Admin
+      summary: if admin, get list of all orders
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  orders:
+                    type: array
+                    items:
+                      properties:
+                        _id:
+                          type: string
+                        user:
+                          type: string
+                        orderStatus:
+                          type: string
+                        createdAt:
+                          type: string
+                        shippingInfo:
+                          type: object
+                          properties:
+                            address:
+                              type: string
+                            city:
+                              type: string
+                            phoneNo:
+                              type: string
+                            postalCode:
+                              type: string
+                            state:
+                              type: string
+                            country:
+                              type: string
+                        paymentInfo:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                        taxAmount:
+                          type: number
+                        shippingAmount:
+                          type: number
+                        totalAmount:
+                          type: number
+                        orderItems:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              quantity:
+                                type: string
+                              image:
+                                type: string
+                              price:
+                                type: number
+                              product:
+                                type: string
+                                description: id of product
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /admin/order/{id}:
+    put:
+      tags:
+        - Admin
+      summary: if admin, update the status of the order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the order
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - orderStatus
+              properties:
+                orderStatus:
+                  type: string
+                  enum: [Processing, Delivered]
+                  required: true
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  order:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                      user:
+                        type: string
+                      orderStatus:
+                        type: string
+                      createdAt:
+                        type: string
+                      shippingInfo:
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                          city:
+                            type: string
+                          phoneNo:
+                            type: string
+                          postalCode:
+                            type: string
+                          state:
+                            type: string
+                          country:
+                            type: string
+                      paymentInfo:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                      taxAmount:
+                        type: number
+                      shippingAmount:
+                        type: number
+                      totalAmount:
+                        type: number
+                      orderItems:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            quantity:
+                              type: string
+                            image:
+                              type: string
+                            price:
+                              type: number
+                            product:
+                              type: string
+                              description: id of product
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+    delete:
+      tags:
+        - Admin
+      summary: if admin, delete an order with given id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the order
+          schema:
+            type: string
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /stripekey:
+    get:
+      tags:
+        - Payment
+      summary: gets you the public stripe key
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stripekey:
+                    type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /razorpaykey:
+    get:
+      tags:
+        - Payment
+      summary: gets you the public razorpay key
+      requestBody:
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  razorpaykey:
+                    type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /capturestripe:
+    post:
+      tags:
+        - Payment
+      summary: send amount in number. Send amount after multiplying by 100. Also request from swagger UI are not proper as to capture payment we need to send dummy card details
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  type: number
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  amount:
+                    type: number
+                  client_secret:
+                    type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
+
+  /capturerazorpay:
+    post:
+      tags:
+        - Payment
+      summary: send amount in number. Send amount after multiplying by 100. Check orders tab, not payments. Also request from swagger UI are not proper as to capture payment we need to send dummy card details.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  type: number
+
+      responses:
+        200:
+          description: All good success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  amount:
+                    type: number
+                  order:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      amount:
+                        type: number
+                      currency:
+                        type: string
+
+        400:
+          description: Bad request
+        500:
+          description: internal server error
