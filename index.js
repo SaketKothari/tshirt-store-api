@@ -13,6 +13,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+app.get('/', (req, res) => {
+  res.json({ mssg: 'Welcome to the app' });
+});
+
 app.listen(process.env.PORT, () => {
   console.log(`Server is running at port: ${process.env.PORT}`);
 });
