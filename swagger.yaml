@@ -24,14 +24,14 @@ servers:
         default: v1
       url:
         enum:
+          - tshirt-store.onrender.com
           - localhost:4000
-          - tshirt-addicts.herokuapp.com
-        default: localhost:4000
+        default: tshirt-store.onrender.com
       protocol:
         enum:
           - http
           - https
-        default: http
+        default: https
 
 components:
   securitySchemes:

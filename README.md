@@ -1,10 +1,13 @@
 # ecommerce-store
-### [Swagger Live API Documentation](https://tshirt-addicts.herokuapp.com/api-docs/)
+
+### [Swagger Live API Documentation](https://tshirt-store.onrender.com/api-docs/)
+
 <img style="text-align:center" src="https://user-images.githubusercontent.com/81709725/171385115-0a72bda1-fbc2-40c5-aa03-8acbb0912f6d.png" />
 
 #
 
 ### Basic Features in this API:
+
 - A backend API for tshirt store.
 - Signup, login and logout of users.
 - Authentication using JSON Web Tokens (JWT).
@@ -17,5 +20,3 @@
 - After the user chose a product, he can place the order of that product.
 - Used cloudinary to upload the images.
 - Send email through nodemailer.
-
-
