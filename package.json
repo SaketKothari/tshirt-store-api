@@ -24,7 +24,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.12.6",
     "morgan": "^1.10.0",
-    "nodemailer": "^6.7.5",
+    "nodemailer": "^6.9.9",
     "razorpay": "^2.8.1",
     "stripe": "^9.1.0",
     "swagger-ui-express": "^4.4.0",
